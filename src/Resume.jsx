@@ -162,7 +162,7 @@ const Resume = () => {
               {/* Profile Section */}
               <div className="text-center mb-8">
                 <div className="inline-block relative mb-6">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-900/30 overflow-hidden mx-auto">
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-900/30  overflow-hidden mx-auto">
                     <img 
                         src={profile} 
                       alt="Waseem Adil - MERN Stack Developer"
@@ -174,7 +174,7 @@ const Resume = () => {
                     />
                     <div className="w-full h-full bg-gray-800 flex items-center justify-center" style={{display: 'none'}}>
                       <div className="text-center">
-                        <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <div className="w-12 h-12 bg-white/10 flex items-center justify-center mx-auto mb-2">
                           <User size={20} className="text-gray-400" />
                         </div>
                         <p className="text-gray-500 text-xs font-light">Profile Photo</p>
@@ -327,11 +327,15 @@ const Resume = () => {
           <section className="mb-16">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
               <div className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
-            hover:bg-emerald-500/5 hover:border-emerald-400/60
+            hover:bg-emerald-500/5 hover:border-emerald-400/60 
             hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
             hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
-            transition-all duration-500 ease-out cursor-pointer
+            transiti`on-all duration-500 ease-out cursor-pointer
             overflow-hidden group">
+
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+             
                 <div className="flex items-center gap-3 mb-6">
                   <GraduationCap className="text-white" size={24} />
                   <h3 className="text-xl font-light text-white tracking-wide">Education</h3>
@@ -344,7 +348,15 @@ const Resume = () => {
                 </div>
               </div>
               
-              <div className="border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20">
+              <div className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
+            hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden group">
+
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
                 <div className="flex items-center gap-3 mb-6">
                   <Target className="text-white" size={24} />
                   <h3 className="text-xl font-light text-white tracking-wide">Core Expertise</h3>
@@ -380,7 +392,14 @@ const Resume = () => {
               </h2>
             </div>
             
-            <div className="border border-gray-800 rounded-sm p-6 lg:p-8 bg-gray-900/20">
+            <div className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
+            hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6 gap-4">
                 <div>
                   <h3 className="text-xl font-light text-white mb-2">{experience.role}</h3>
@@ -417,7 +436,14 @@ const Resume = () => {
             
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
               {projects.map((project, index) => (
-                <div key={index} className="border border-gray-800 rounded-sm p-6 lg:p-8 bg-gray-900/20 hover:bg-gray-900/30 transition-all duration-300">
+                <div key={index} className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
+            hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
                   <div className="flex items-center gap-3 mb-3">
                     {project.icon}
                     <h3 className="text-lg font-light text-white tracking-wide">{project.title}</h3>
@@ -446,6 +472,7 @@ const Resume = () => {
           </section>
 
           {/* Skills & Certifications */}
+          
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
             {/* Technical Skills */}
             <section>
@@ -464,7 +491,11 @@ const Resume = () => {
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {skills.languages.map((skill) => (
-                      <span key={skill.name} className="bg-white text-black px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2">
+                      <span key={skill.name} className="bg-white text-black px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2 hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden hover:text-white group">
                         {skill.icon}
                         {skill.name}
                       </span>
@@ -479,7 +510,11 @@ const Resume = () => {
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {skills.frameworks.map((skill) => (
-                      <span key={skill.name} className="border border-gray-600 text-gray-300 px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2">
+                      <span key={skill.name} className="border border-gray-600 text-gray-300 px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2 hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden hover:text-white group ">
                         {skill.icon}
                         {skill.name}
                       </span>
@@ -494,7 +529,11 @@ const Resume = () => {
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {skills.tools.map((skill) => (
-                      <span key={skill.name} className="border border-gray-600 text-gray-300 px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2">
+                      <span key={skill.name} className="border border-gray-600 text-gray-300 px-4 py-2 rounded-sm text-sm font-light flex items-center gap-2 hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden hover:text-white group">
                         {skill.icon}
                         {skill.name}
                       </span>
@@ -515,7 +554,14 @@ const Resume = () => {
               
               <div className="space-y-6">
                 {certifications.map((cert, index) => (
-                  <div key={index} className="border border-gray-800 p-6 rounded-sm bg-gray-900/20">
+                  <div key={index} className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
+            hover:bg-emerald-500/5 hover:border-emerald-400/60 
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transiti`on-all duration-500 ease-out cursor-pointer
+            overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
