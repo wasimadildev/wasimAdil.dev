@@ -37,6 +37,7 @@ import {
   Image
 } from 'lucide-react';
 import profile from './assets/waseem.jpeg';
+import CV from './assets/CV.pdf'
 const Resume = () => {
   const skills = {
     languages: [
@@ -198,17 +199,19 @@ const Resume = () => {
                 </p>
                 
                 <button 
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = '/path-to-your-resume.pdf';
-                    link.download = 'Waseem_Adil_Resume.pdf';
-                    link.click();
-                  }}
-                  className="border-2 border-white text-white hover:bg-white hover:text-black px-6 py-2.5 rounded-sm transition-all duration-300 font-medium tracking-wide flex items-center gap-2 mx-auto mb-8 group"
-                >
-                  <Download size={16} className="group-hover:text-black transition-colors duration-300" />
-                  Download CV
-                </button>
+  onClick={() => {
+    const link = document.createElement('a');
+    link.href = CV; // ✅ Use the imported variable directly
+    link.download = 'Waseem_Adil_CV.pdf'; // ✅ File name to save as
+    document.body.appendChild(link); // sometimes required for Safari
+    link.click();
+    document.body.removeChild(link);
+  }}
+  className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-sm transition-all duration-300 font-medium tracking-wide flex items-center gap-3 w-fit group"
+>
+  <Download size={18} className="group-hover:text-black transition-colors duration-300" />
+  Download CV
+</button>
               </div>
               
               {/* Contact Info Mobile */}
@@ -253,17 +256,19 @@ const Resume = () => {
                   </p>
                   
                   <button 
-                    onClick={() => {
-                      const link = document.createElement('a');
-                      link.href = '/path-to-your-resume.pdf';
-                      link.download = 'Waseem_Adil_Resume.pdf';
-                      link.click();
-                    }}
-                    className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-sm transition-all duration-300 font-medium tracking-wide flex items-center gap-3 w-fit group"
-                  >
-                    <Download size={18} className="group-hover:text-black transition-colors duration-300" />
-                    Download CV
-                  </button>
+  onClick={() => {
+    const link = document.createElement('a');
+    link.href = CV; // ✅ Use the imported variable directly
+    link.download = 'Waseem_Adil_CV.pdf'; // ✅ File name to save as
+    document.body.appendChild(link); // sometimes required for Safari
+    link.click();
+    document.body.removeChild(link);
+  }}
+  className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-sm transition-all duration-300 font-medium tracking-wide flex items-center gap-3 w-fit group"
+>
+  <Download size={18} className="group-hover:text-black transition-colors duration-300" />
+  Download CV
+</button>
                 </div>
                 
                 {/* Profile Image Desktop */} 
