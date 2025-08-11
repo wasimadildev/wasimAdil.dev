@@ -326,12 +326,12 @@ const Resume = () => {
           {/* Education & Core Expertise */}
           <section className="mb-16">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              <div className="border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
-hover:bg-violet-500/10 hover:border-violet-400 
-hover:shadow-[inset_0_0_50px_rgba(139,92,246,0.2),0_0_50px_rgba(139,92,246,0.3)]
-hover:scale-125 hover:-translate-y-4 hover:rotate-3
-transition-all duration-600 ease-out cursor-pointer
-hover:backdrop-blur-xl">
+              <div className="relative border border-gray-800 p-6 lg:p-8 rounded-sm bg-gray-900/20 
+            hover:bg-emerald-500/5 hover:border-emerald-400/60
+            hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
+            hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
+            transition-all duration-500 ease-out cursor-pointer
+            overflow-hidden group">
                 <div className="flex items-center gap-3 mb-6">
                   <GraduationCap className="text-white" size={24} />
                   <h3 className="text-xl font-light text-white tracking-wide">Education</h3>
