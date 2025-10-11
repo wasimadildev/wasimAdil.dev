@@ -6,17 +6,28 @@ export default function CustomCursor() {
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(true);
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   const rafRef = useRef(null);
   const lastPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
+    // Detect mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /iPhone|iPad|Android/i.test(navigator.userAgent));
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // Skip cursor setup on mobile
 
     const handleMouseMove = (e) => {
       const newPos = { x: e.clientX, y: e.clientY };
       
-      // Calculate velocity for trail effect
       setVelocity({
         x: newPos.x - lastPosRef.current.x,
         y: newPos.y - lastPosRef.current.y,
@@ -37,14 +48,13 @@ export default function CustomCursor() {
       setHovered(!!hoverable);
     };
 
-    // Smooth animation loop using requestAnimationFrame
+    // Smooth animation loop
     const animate = () => {
       setSmoothPos((prev) => {
         const dx = pos.x - prev.x;
         const dy = pos.y - prev.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        // Adaptive lerp based on distance for spring-like effect
         const speed = distance > 50 ? 0.15 : 0.12;
         
         return {
@@ -70,7 +80,51 @@ export default function CustomCursor() {
       document.removeEventListener("mouseover", handleHoverTarget);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [pos]);
+  }, [pos, isMobile]);
+
+  // Show normal cursor on mobile
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none bg-slate-950">
+        {/* Grid Background */}
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(30, 144, 255, 0.3)" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+
+        {/* Other background elements */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.08]">
+          <defs>
+            <pattern id="hexgrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+              <polygon points="30,0 60,15 60,45 30,60 0,45 0,15" fill="none" stroke="rgba(59, 130, 246, 0.5)" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hexgrid)" />
+        </svg>
+
+        <div className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(59, 130, 246, 0.6) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
+
+        <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-emerald-500/20 rounded-br-3xl opacity-50"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-emerald-500/20 rounded-tl-3xl opacity-50"></div>
+
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: "linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent)",
+            backgroundSize: "100% 4px",
+          }}
+        ></div>
+      </div>
+    );
+  }
 
   if (!visible) return null;
 
@@ -81,7 +135,6 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Global cursor hide */}
       <style>{`
         * {
           cursor: none !important;
@@ -96,6 +149,11 @@ export default function CustomCursor() {
           0%, 100% { opacity: 0; }
           50% { opacity: 1; }
         }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
       `}</style>
 
       {/* Cursor Container */}
@@ -106,7 +164,7 @@ export default function CustomCursor() {
           transition: "opacity 0.2s ease-out",
         }}
       >
-        {/* Glow Background - Large blur */}
+        {/* Glow Background */}
         <div
           className="absolute rounded-full"
           style={{
@@ -121,7 +179,7 @@ export default function CustomCursor() {
           }}
         ></div>
 
-        {/* Outer ring - rotating */}
+        {/* Outer ring */}
         <div
           className="absolute"
           style={{
@@ -134,14 +192,10 @@ export default function CustomCursor() {
             animation: "spin 4s linear infinite",
             transition: "all 0.3s ease-out",
             boxShadow: `inset 0 0 16px rgba(0, 255, 153, 0.2)`,
-            "@keyframes spin": {
-              from: { transform: "rotate(0deg)" },
-              to: { transform: "rotate(360deg)" },
-            },
           }}
         ></div>
 
-        {/* Diffusion halo - difference blend */}
+        {/* Diffusion halo */}
         <div
           className="absolute rounded-full"
           style={{
@@ -171,7 +225,6 @@ export default function CustomCursor() {
             backdropFilter: "blur(4px)",
           }}
         >
-          {/* Highlight sparkle */}
           <div
             className="absolute rounded-full"
             style={{
@@ -186,7 +239,7 @@ export default function CustomCursor() {
           ></div>
         </div>
 
-        {/* Trailing particles on fast movement */}
+        {/* Trailing particles */}
         {speed > 2 && (
           <>
             <div
@@ -219,9 +272,8 @@ export default function CustomCursor() {
         )}
       </div>
 
-      {/* Background with grid patterns */}
+      {/* Background */}
       <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none bg-slate-950">
-        {/* Grid Background */}
         <svg className="absolute inset-0 w-full h-full opacity-20">
           <defs>
             <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -231,7 +283,6 @@ export default function CustomCursor() {
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
 
-        {/* Hex Grid Pattern */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.08]">
           <defs>
             <pattern id="hexgrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
@@ -241,7 +292,6 @@ export default function CustomCursor() {
           <rect width="100%" height="100%" fill="url(#hexgrid)" />
         </svg>
 
-        {/* Cursor following glow - Green gradient */}
         <div
           className="absolute w-[500px] h-[500px] bg-gradient-radial from-emerald-500/25 via-emerald-400/5 to-transparent blur-3xl rounded-full transition-transform duration-200 ease-out pointer-events-none"
           style={{
@@ -250,7 +300,6 @@ export default function CustomCursor() {
           }}
         ></div>
 
-        {/* Secondary accent glow - Cyan */}
         <div
           className="absolute w-[350px] h-[350px] bg-gradient-radial from-cyan-500/15 via-cyan-400/5 to-transparent blur-3xl rounded-full transition-transform duration-300 ease-out pointer-events-none"
           style={{
@@ -259,7 +308,6 @@ export default function CustomCursor() {
           }}
         ></div>
 
-        {/* Dot Matrix Pattern */}
         <div className="absolute inset-0 opacity-[0.12]"
           style={{
             backgroundImage: "radial-gradient(circle, rgba(59, 130, 246, 0.6) 1px, transparent 1px)",
@@ -267,44 +315,10 @@ export default function CustomCursor() {
           }}
         ></div>
 
-        {/* Code Block Lines - Subtle */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.06]">
-          <defs>
-            <pattern id="code-lines" x="0" y="0" width="120" height="24" patternUnits="userSpaceOnUse">
-              <line x1="0" y1="8" x2="100" y2="8" stroke="rgba(0, 255, 153, 0.4)" strokeWidth="0.5"/>
-              <line x1="0" y1="16" x2="95" y2="16" stroke="rgba(0, 204, 102, 0.3)" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#code-lines)" />
-        </svg>
-
-        {/* Diagonal Lines - Tech feel */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
-          <defs>
-            <pattern id="diagonal" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-              <line x1="0" y1="0" x2="0" y2="80" stroke="rgba(0, 255, 153, 0.3)" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#diagonal)" />
-        </svg>
-
-        {/* Radial circles at intervals */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.08]">
-          <defs>
-            <pattern id="circles" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(0, 255, 153, 0.3)" strokeWidth="0.5"/>
-              <circle cx="50" cy="50" r="15" fill="none" stroke="rgba(0, 204, 102, 0.2)" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#circles)" />
-        </svg>
-
-        {/* Corner accents */}
         <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-emerald-500/20 rounded-br-3xl opacity-50"></div>
         <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-emerald-500/20 rounded-tl-3xl opacity-50"></div>
         <div className="absolute top-1/2 right-0 w-32 h-32 border-l-2 border-emerald-500/10 opacity-30"></div>
 
-        {/* Scanline effect */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
             backgroundImage: "linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent)",
@@ -312,8 +326,6 @@ export default function CustomCursor() {
           }}
         ></div>
       </div>
-
-
     </>
   );
 }
