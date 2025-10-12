@@ -6,6 +6,7 @@ import Projects from './components/Projects.jsx';
 import {Skills} from './components/Skills.jsx';
 import Certifications from './components/Certifications.jsx';
 import Footer from './components/Footer.jsx';
+import Blog from './components/Blog.jsx';
 const Resume = () => {
 
 
@@ -36,8 +37,11 @@ const Resume = () => {
 
             {/* Certifications */}
             <Certifications/>
+
+          
            
           </div>
+            <Blog/>
         </div>
 
         {/* Footer */}
