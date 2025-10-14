@@ -11,8 +11,13 @@ import {
   User,
   Download,
 } from "lucide-react";
+import useTheme from "../hooks/useTheme"; // 👈 import your hook
+
 
 function Header() {
+    const { theme, toggleTheme } = useTheme(); // 👈 use it here
+
+
   const handleDownloadCV = () => {
     const link = document.createElement("a");
     link.href = "#";
@@ -83,6 +88,17 @@ function Header() {
   return (
     <header className="relative overflow-hidden">
       {/* Animated Background Elements */}
+      <button
+    onClick={toggleTheme}
+    className="absolute top-6 right-6 bg-white/10 dark:bg-gray-800 p-2 rounded-full hover:scale-110 transition-transform duration-300 z-20"
+  >
+    {theme === "dark" ? (
+      <Sun size={20} className="text-yellow-400" />
+    ) : (
+      <Moon size={20} className="text-gray-200" />
+    )}
+  </button>
+  
       <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-10">
           {[...Array(96)].map((_, i) => (

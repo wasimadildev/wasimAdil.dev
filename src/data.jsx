@@ -74,6 +74,7 @@ export const projects = [
       description: 'Secure REST API with comprehensive authentication and CRUD operations',
       highlights: ['JWT authentication', 'Email OTP verification', 'Security best practices'],
       icon: <Server size={18} />
+    
     },
     {
       title: 'Q&A Platform',
