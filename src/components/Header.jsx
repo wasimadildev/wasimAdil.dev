@@ -1,5 +1,7 @@
 import React from "react";
 import profile from "../assets/waseem.jpeg";
+import CV from "../assets/CV.pdf";
+
 import {
   Github,
   Linkedin,
@@ -10,18 +12,17 @@ import {
   Code,
   User,
   Download,
+  Import,
 } from "lucide-react";
-import useTheme from "../hooks/useTheme"; // 👈 import your hook
 
 
 function Header() {
-    const { theme, toggleTheme } = useTheme(); // 👈 use it here
 
 
   const handleDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "#";
-    link.download = "Waseem_Adil_CV.pdf";
+    link.href = CV;
+    link.download = "CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -78,27 +79,38 @@ function Header() {
     </div>
   );
 
-  const SocialLinks = ({ isDesktop = false }) => (
-    <div className={`flex gap-5 ${isDesktop ? "justify-end mt-6" : "justify-center gap-6"}`}>
-      <Github size={20} className="text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer" />
-      <Linkedin size={20} className="text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer" />
-    </div>
-  );
+const SocialLinks = ({ isDesktop = false }) => (
+  <div
+    className={`flex gap-5 ${
+      isDesktop ? "justify-end mt-6" : "justify-center gap-6"
+    }`}
+  >
+    {/* GitHub */}
+    <a
+      href="https://github.com/wasimadildev" // 🔗 your GitHub profile
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer"
+    >
+      <Github size={20} />
+    </a>
+
+    {/* LinkedIn */}
+    <a
+      href="https://www.linkedin.com/in/wasimadildev/" // 🔗 your LinkedIn profile
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer"
+    >
+      <Linkedin size={20} />
+    </a>
+  </div>
+);
 
   return (
     <header className="relative overflow-hidden">
       {/* Animated Background Elements */}
-      <button
-    onClick={toggleTheme}
-    className="absolute top-6 right-6 bg-white/10 dark:bg-gray-800 p-2 rounded-full hover:scale-110 transition-transform duration-300 z-20"
-  >
-    {theme === "dark" ? (
-      <Sun size={20} className="text-yellow-400" />
-    ) : (
-      <Moon size={20} className="text-gray-200" />
-    )}
-  </button>
-  
+    
       <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-10">
           {[...Array(96)].map((_, i) => (
