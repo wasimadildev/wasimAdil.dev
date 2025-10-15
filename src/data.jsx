@@ -5,7 +5,7 @@ import {
   Globe, 
   
   Target,
-  
+
   Server,
   Monitor,
   
@@ -52,39 +52,42 @@ export const skills = {
     concepts: ['Full-Stack Development', 'RESTful APIs', 'Authentication', 'Database Design']
   };
 
-  
 export const projects = [
-    {
-      title: 'Real-Time Chat & Media App',
-      tech: ['Node.js', 'React', 'MongoDB', 'WebSockets', 'Redux'],
-      description: 'Full-stack messaging app with JWT authentication and WebSocket communication',
-      highlights: ['Real-time messaging', 'Audio/video communication', 'Cross-device compatibility'],
-      icon: <Globe size={18} />
-    },
-    {
-      title: 'Netflix-GPT',
-      tech: ['React', 'Firebase', 'GPT API'],
-      description: 'AI-powered movie recommendation platform with dynamic search functionality',
-      highlights: ['AI recommendations', 'Firebase authentication', 'Responsive design'],
-      icon: <Monitor size={18} />
-    },
-    {
-      title: 'Blog API with Authentication',
-      tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
-      description: 'Secure REST API with comprehensive authentication and CRUD operations',
-      highlights: ['JWT authentication', 'Email OTP verification', 'Security best practices'],
-      icon: <Server size={18} />
-    
-    },
-    {
-      title: 'Q&A Platform',
-      tech: ['Next.js', 'Appwrite', 'Tailwind CSS'],
-      description: 'Interactive platform with real-time voting and user interactions',
-      highlights: ['Real-time updates', 'User voting system', 'Modern UI/UX'],
-      icon: <Target size={18} />
-    }
-  ];
-
+  {
+    title: "Real-Time Chat & Media App",
+    tech: ["Node.js", "React", "MongoDB", "WebSockets", "Redux"],
+    description: "Full-stack messaging app with JWT authentication and WebSocket communication",
+    highlights: ["Real-time messaging", "Audio/video communication", "Cross-device compatibility"],
+    icon: <Globe size={18} />,
+    repo: "https://github.com/wasimadildev/",
+    live: "https://chatapp-demo.vercel.app"
+  },
+  {
+    title: "Netflix-GPT",
+    tech: ["React", "Firebase", "GPT API"],
+    description: "AI-powered movie recommendation platform with dynamic search functionality",
+    highlights: ["AI recommendations", "Firebase authentication", "Responsive design"],
+    icon: <Monitor size={18} />,
+    repo: "https://github.com/wasimadildev/netflix-gpt",
+  },
+  {
+    title: "Blog API with Authentication",
+    tech: ["Node.js", "Express", "MongoDB", "JWT"],
+    description: "Secure REST API with comprehensive authentication and CRUD operations",
+    highlights: ["JWT authentication", "Email OTP verification", "Security best practices"],
+    icon: <Server size={18} />,
+    repo: "https://github.com/wasimadildev/BLOG-API-WITH-AUTHENTICATION-AUTHORIZATION-.git",
+  },
+  {
+    title: "Q&A Platform",
+    tech: ["Next.js", "Appwrite", "Tailwind CSS"],
+    description: "Interactive platform with real-time voting and user interactions",
+    highlights: ["Real-time updates", "User voting system", "Modern UI/UX"],
+    icon: <Target size={18} />,
+    repo: "https://github.com/wasimadildev/qa-platform",
+    live: "https://qa-platform.vercel.app"
+  }
+];
 
 
  export   const experience = {
@@ -99,23 +102,27 @@ export const projects = [
 
 
 
- export const certifications = [
-    {
-      title: 'Complete Web Development Course',
-      issuer: 'Udemy - Hitesh Choudhary',
-      date: 'July 2025',
-      icon: <Code size={14} />
-    },
-    {
-      title: 'DSA in Java',
-      issuer: 'Apna College',
-      date: 'October 2024',
-      icon: <Database size={14} />
-    },
-    {
-      title: 'Fundamentals of Backend Engineering',
-      issuer: 'Udemy - Hussein Nasser',
-      date: 'January 2025',
-      icon: <Server size={14} />
-    }
-  ];
+
+export const certifications = [
+  {
+    title: "Complete Web Development Course",
+    issuer: "Udemy - Hitesh Choudhary",
+    date: "July 2025",
+    icon: <Code size={14} />,
+    link: "https://www.udemy.com/certificate/UC-831c4db6-8478-44aa-9c18-c3e8eab17ee7/"
+  },
+  {
+    title: "DSA in Java",
+    issuer: "Apna College",
+    date: "October 2024",
+    icon: <Database size={14} />,
+    link: "https://drive.google.com/file/d/XXXXXXX/view"
+  },
+  {
+    title: "Fundamentals of Backend Engineering",
+    issuer: "Udemy - Hussein Nasser",
+    date: "January 2025",
+    icon: <Server size={14} />,
+    link: "https://www.udemy.com/certificate/UC-YYYYYYY/"
+  }
+];

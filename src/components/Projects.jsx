@@ -1,6 +1,5 @@
 import React from "react";
-import { Layers, CheckCircle } from "lucide-react";
-
+import { Layers, CheckCircle, Globe, Monitor, Server, Target, Github, ExternalLink } from "lucide-react";
 import { projects } from "../data";
 
 function Projects() {
@@ -21,22 +20,52 @@ function Projects() {
             hover:bg-emerald-500/5 hover:border-emerald-400/60 
             hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] 
             hover:scale-[1.03] hover:skew-y-1 hover:-translate-y-1
-            transiti`on-all duration-500 ease-out cursor-pointer
+            transition-all duration-500 ease-out 
             overflow-hidden group"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-            <div className="flex items-center gap-3 mb-3">
-              {project.icon}
-              <h3 className="text-lg font-light text-white tracking-wide">
-                {project.title}
-              </h3>
+            {/* Title + Icon */}
+            <div className="flex items-center justify-between mb-3 relative z-10">
+              <div className="flex items-center gap-3">
+                {project.icon}
+                <h3 className="text-lg font-light text-white tracking-wide">
+                  {project.title}
+                </h3>
+              </div>
+
+              {/* Repo & Live Links */}
+              <div className="flex items-center gap-3 pointer-events-auto">
+                {project.repo && (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors duration-300"
+                  >
+                    <Github size={18} />
+                  </a>
+                )}
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors duration-300"
+                  >
+                    <ExternalLink size={18} />
+                  </a>
+                )}
+              </div>
             </div>
-            <p className="text-gray-400 text-sm mb-4 font-light leading-relaxed">
+
+            {/* Description */}
+            <p className="text-gray-400 text-sm mb-4 font-light leading-relaxed relative z-10">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2 mb-4 relative z-10">
               {project.tech.map((tech, i) => (
                 <span
                   key={i}
@@ -47,7 +76,8 @@ function Projects() {
               ))}
             </div>
 
-            <div className="space-y-2">
+            {/* Highlights */}
+            <div className="space-y-2 relative z-10">
               {project.highlights.map((highlight, i) => (
                 <div
                   key={i}
