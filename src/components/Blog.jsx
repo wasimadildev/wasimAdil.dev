@@ -15,6 +15,12 @@ function Blog() {
       link: "https://dev.to/wasimadildev/setting-up-prisma-postgresql-in-a-monorepo-turborepo-pnpm-nodejs-30ah",
       platform: "Dev.to",
     },
+    {
+      title:
+        "5 Important Things to Secure Your Backend API (For Beginners)",
+      link: "https://dev.to/wasimadildev/5-important-things-to-secure-your-backend-api-for-beginners-1ick",
+      platform: "Dev.to",
+    },
   ];
 
   return (
